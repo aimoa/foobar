@@ -6,9 +6,9 @@ from skimage.feature import peak_local_max
 from scipy.spatial import Delaunay
 from skimage.draw import polygon
 
-image = plt.imread('./%s.jpg' % sys.argv[1])/255.
-r_grad, c_grad = np.gradient(np.dot(image, [0.299, 0.587, 0.114]))[:2]
-grad = r_grad**2 + c_grad**2
+image = plt.imread('./{}.jpg'.format(sys.argv[1]))/255.
+grad = np.gradient(np.dot(image, [0.299, 0.587, 0.114]))
+grad = grad[0]**2 + grad[1]**2
 
 coords = peak_local_max(grad, min_distance=8, threshold_rel=0)
 coords = np.vstack((coords,[0,0],[0,image.shape[1]],[image.shape[0],0],\
